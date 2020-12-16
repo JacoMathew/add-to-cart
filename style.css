@@ -1,0 +1,97 @@
+:root {
+  --headerBGColour: #221e2e;
+  --headerTxtColour: #ff0000;
+  --cardBGColor: #c4b3f7;
+  --headerTxtFocusColour: #ecf6fd;
+  --sectionPadding: 6vw;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Berkshire Swash", cursive;
+}
+
+#section1,
+#section2 {
+  height: 100vh;
+}
+
+#section1 {
+  background-color: rgb(119, 247, 247);
+}
+
+#section2 {
+  background-color: rgb(252, 201, 106);
+}
+.sectionStyle {
+  height: auto;
+  min-height: 100vh;
+}
+
+.content {
+  font-family: "Ma Shan Zheng", cursive;
+}
+
+/* .navbarButton{
+    border-color: var(--headerTxtColour) !important;
+} */
+
+.navbarIconColour {
+  /* color:  var(--headerTxtColour) !important ; */
+  font-size: 2rem;
+}
+
+.cardStyling {
+  margin-top: 1rem;
+  box-shadow: 0 8px 16px 0 var(--headerBGColour);
+  width: auto;
+  border-radius: 0.5rem 0.5rem;
+  overflow: hidden;
+}
+
+.cardText {
+  width: 70%;
+  padding: 1rem 0px 0.5rem 2rem;
+  background-color: var(--cardBGColor);
+}
+
+
+/* Link of mkaing the shopping cart to the far right end of the div  */
+/* https://stackoverflow.com/questions/16832334/stick-button-to-right-side-of-div */
+#Products h1{
+  text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin-right: -50%;
+}
+
+.shoppingCart{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  float: right;
+  margin-right: 2rem;
+}
+
+.buttonAdd{
+  border-radius: .5rem;
+}
+
+/* Table inside the Modal */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid var(--headerBGColour);
+  text-align: left;
+  padding: .5rem;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

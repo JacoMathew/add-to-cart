@@ -1,0 +1,26 @@
+<script id="item-template" type="text/x-handlebars-template">
+  {{#each this}}
+    <div class="col-lg-2">
+      <div class="card cardStyling">
+        <img class="card-img-top" src="http://placehold.it/100" alt="Card image cap">
+        <div class="card-body ">
+          <div class="cardText w-100 px-auto">
+            <h1 class="font-weight-bold {{.}}{{@index}}Product">
+              {{.}}
+            </h1>
+          </div>
+        </div>
+        
+        <div class="card-footer" >
+          <button class="px-1 py-2 w-100 buttonAdd" id="{{.}}{{@index}}">
+            <h5 class="font-weight-bold">
+              Add to Cart
+            </h5>
+          </button>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</script>
+
+<script src="Assets/productsJs/products.js"></script>

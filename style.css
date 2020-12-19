@@ -2,8 +2,10 @@
   --headerBGColour: #221e2e;
   --headerTxtColour: #ff0000;
   --cardBGColor: #c4b3f7;
+  --modalTableHead :#c4b3f7;
+  --modalRowSeperation : #efebfa;
   --headerTxtFocusColour: #ecf6fd;
-  --sectionPadding: 6vw;
+  --sectionPadding: 3rem;
 }
 
 * {
@@ -14,8 +16,10 @@
 }
 
 #section1,
-#section2 {
-  height: 100vh;
+#section2,
+#Products {
+  min-height: 100vh;
+  padding: 0px var(--sectionPadding);
 }
 
 #section1 {
@@ -53,7 +57,7 @@
 
 .cardText {
   width: 70%;
-  padding: 1rem 0px 0.5rem 2rem;
+  padding: 1rem 0px 0.5rem 0px;
   background-color: var(--cardBGColor);
 }
 
@@ -75,8 +79,13 @@
   margin-right: 2rem;
 }
 
-.buttonAdd{
+.buttonAdd, .buttonPlus, .buttonMinus{
   border-radius: .5rem;
+}
+
+.buttonPlus,
+.buttonMinus {
+  padding: .5rem .5rem;
 }
 
 /* Table inside the Modal */
@@ -88,10 +97,28 @@ table {
 
 td, th {
   border: 1px solid var(--headerBGColour);
-  text-align: left;
+  /* text-align: left; */
   padding: .5rem;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
+thead th,
+tfoot td{
+  text-align: center;
+  background-color: var(--modalTableHead);
+}
+
+tbody td{
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--modalRowSeperation);
+}
+
+.receipt{
+  padding: .5rem 2rem;
+
+  background-color: black;
+  color: white;
+  border-radius: 1rem;
 }

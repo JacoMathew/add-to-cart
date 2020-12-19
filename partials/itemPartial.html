@@ -10,13 +10,32 @@
             </h1>
           </div>
         </div>
-        
-        <div class="card-footer" >
-          <button class="px-1 py-2 w-100 buttonAdd" id="{{.}}{{@index}}">
+
+        <div class="card-footer" id="{{.}}{{@index}}">
+          <button class="px-1 py-2 w-100 buttonAdd" >
             <h5 class="font-weight-bold">
               Add to Cart
             </h5>
           </button>
+          <div class="row justify-content-around buttonCluster"
+          style="display: none;"
+          >
+            <button
+                class="buttonMinus"
+                type="button">
+                    <span>
+                        <i class="fas fa-minus fa-lg"></i>
+                    </span>
+            </button>
+            <h3 class="py-auto ">1</h3>
+            <button
+                class="buttonPlus" 
+                type="button">
+                    <span>
+                        <i class="fas fa-plus fa-lg"></i>
+                    </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

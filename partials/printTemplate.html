@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receipt</title>
+    <!-- Additional head scripts, link -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/ef8dcddefd.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="/style.css" type="text/css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Ma+Shan+Zheng&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid py-3">
+        <div class="row d-flex justify-content-center mb-4">
+          <h1 class="col-12 text-center">Company Name</h1>
+          <h5 class="col-12 text-center">Building Name, Post Office</h5>
+          <h5 class="col-12 text-center">District, Pincode</h5>
+          <h5 class="col-12 text-center">Contact, E-mail</h5>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <h1 class="text-center receipt">Receipt</h1>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="container-fluid py-3 px-5">
+        <div class="row justify-content-between p-0">
+          <p class="mb-0">Name :</p>
+          <p class="mb-0">Date :</p>
+        </div>
+        <div class="row justify-content-between pt-0">
+          <p id="customer">Cash</p>  
+          <p id="dateTime">Time Stamp</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <table>
+        <thead class="tableHeader">
+          <tr>
+            <th>Qty</th>
+            <th>Items</th>
+            <th>Rate</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <!-- Body content to loop through -->
+        <tbody id="bodyContent-container">
+            <script id="bodyContent-template" type="text/x-handlebars-template">
+            {{#each this}}
+            <tr>
+                <td style="text-align: center">{{this.qty}}</td>
+                <td style="padding-left: 1rem">{{this.name}}</td>
+                <td style="text-align: right; padding-right: 1rem">
+                  {{this.price}}
+                </td>
+                <td style="text-align: right; padding-right: 1rem">
+                  {{this.amount}}
+                </td>
+              </tr>
+
+            {{/each}}
+            </script>
+          
+        </tbody>
+        <tfoot class="tableFooter">
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td id="tableTotal" style="text-align: right; padding-right: 1rem"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <footer>
+      <div class="container-fluid py-3 px-5">
+        <div class="row justify-content-around p-0">
+          <h4 class="mb-0">Created by : Jaco Mathew</h4>
+          <h4 class="mb-0">:-) Thank You (-:</h4>
+        </div>
+        <div class="row justify-content-around p-0">
+          <h4 class="text-center">Available on GitHub</h4>
+          <h4 class="text-center">Have a Wonderful Day</h4>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"
+      integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+        var cartPrint =JSON.parse(localStorage.getItem('cart'));
+        var totalPrint = localStorage.getItem('total')
+
+    </script>
+    <script>
+        const templateHTMLPrint = $("#bodyContent-template").html();
+        const compiledHTMLPrint = Handlebars.compile(templateHTMLPrint);
+        const compiledObjectPrint = compiledHTMLPrint(cartPrint);
+        $("#bodyContent-container").prepend(compiledObjectPrint);
+
+        $('#tableTotal').text(totalPrint);
+        
+        // Set the current time stamp
+        const currentDate = new Date;
+        const timeStamp = currentDate.toLocaleString('en-GB',{ hour12: false })
+        $('#dateTime').text(timeStamp);
+
+        // Prompt for customer name on load / reload
+
+        var customerName = $('#customer').text();
+        var customer = prompt("Please enter Customer name", customerName);
+        if(customer === '' || customer == null ){
+          $('#customer').text('Cash / Credit')
+        } else if(customer != null) {
+          $('#customer').text(customer);
+        };
+
+    </script>
+  </body>
+</html>

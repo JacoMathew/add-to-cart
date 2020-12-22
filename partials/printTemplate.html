@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Receipt</title>
-    <!-- Additional head scripts, link -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -37,57 +36,70 @@
         </div>
       </div>
     </header>
+
     <section>
-      <div class="container-fluid py-3 px-5">
+      <div class="container-fluid pt-3 px-5">
         <div class="row justify-content-between p-0">
           <p class="mb-0">Name :</p>
           <p class="mb-0">Date :</p>
         </div>
         <div class="row justify-content-between pt-0">
-          <p id="customer">Cash</p>  
+          <p id="customer">Cash</p>
           <p id="dateTime">Time Stamp</p>
         </div>
       </div>
     </section>
 
     <section>
-      <table>
-        <thead class="tableHeader">
-          <tr>
-            <th>Qty</th>
-            <th>Items</th>
-            <th>Rate</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <!-- Body content to loop through -->
-        <tbody id="bodyContent-container">
-            <script id="bodyContent-template" type="text/x-handlebars-template">
-            {{#each this}}
-            <tr>
-                <td style="text-align: center">{{this.qty}}</td>
-                <td style="padding-left: 1rem">{{this.name}}</td>
-                <td style="text-align: right; padding-right: 1rem">
-                  {{this.price}}
-                </td>
-                <td style="text-align: right; padding-right: 1rem">
-                  {{this.amount}}
-                </td>
+      <div class="container-fluid">
+        <div class="row" style="padding: 0px 1rem">
+          <table>
+            <thead class="tableHeader">
+              <tr>
+                <th>Qty</th>
+                <th>Items</th>
+                <th>Rate</th>
+                <th>Amount</th>
               </tr>
-
-            {{/each}}
-            </script>
-          
-        </tbody>
-        <tfoot class="tableFooter">
-          <tr>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td id="tableTotal" style="text-align: right; padding-right: 1rem"></td>
-          </tr>
-        </tfoot>
-      </table>
+            </thead>
+            <!-- Body content to loop through -->
+            <tbody id="bodyContent-container">
+              <script
+                id="bodyContent-template"
+                type="text/x-handlebars-template"
+              >
+                {{#each this}}
+                  <tr>
+                    <td style="text-align: center">
+                      {{this.qty}}
+                    </td>
+                    <td style="padding-left: 1rem">
+                      {{this.name}}
+                    </td>
+                    <td style="text-align: right; padding-right: 1rem">
+                      {{this.price}}
+                    </td>
+                    <td style="text-align: right; padding-right: 1rem">
+                      {{this.amount}}
+                    </td>
+                  </tr>
+                {{/each}}
+              </script>
+            </tbody>
+            <tfoot class="tableFooter">
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td
+                  id="tableTotal"
+                  style="text-align: right; padding-right: 1rem"
+                ></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -125,33 +137,42 @@
     ></script>
 
     <script>
-        var cartPrint =JSON.parse(localStorage.getItem('cart'));
-        var totalPrint = localStorage.getItem('total')
+      var cartPrint = JSON.parse(localStorage.getItem("cart"));
+      var totalPrint = localStorage.getItem("total");
 
     </script>
     <script>
-        const templateHTMLPrint = $("#bodyContent-template").html();
-        const compiledHTMLPrint = Handlebars.compile(templateHTMLPrint);
-        const compiledObjectPrint = compiledHTMLPrint(cartPrint);
-        $("#bodyContent-container").prepend(compiledObjectPrint);
+      const templateHTMLPrint = $("#bodyContent-template").html();
+      const compiledHTMLPrint = Handlebars.compile(templateHTMLPrint);
+      const compiledObjectPrint = compiledHTMLPrint(cartPrint);
+      $("#bodyContent-container").prepend(compiledObjectPrint);
 
-        $('#tableTotal').text(totalPrint);
-        
-        // Set the current time stamp
-        const currentDate = new Date;
-        const timeStamp = currentDate.toLocaleString('en-GB',{ hour12: false })
-        $('#dateTime').text(timeStamp);
+      $("#tableTotal").text(totalPrint);
 
-        // Prompt for customer name on load / reload
+      // Set the current time stamp
+      const currentDate = new Date();
+      const timeStamp = currentDate.toLocaleString("en-GB", { hour12: false });
+      $("#dateTime").text(timeStamp);
 
-        var customerName = $('#customer').text();
-        var customer = prompt("Please enter Customer name", customerName);
-        if(customer === '' || customer == null ){
-          $('#customer').text('Cash / Credit')
-        } else if(customer != null) {
-          $('#customer').text(customer);
-        };
+      // Call promt for customer name on load
+      function setCustomerName() {
+        var customerName = $("#customer").text();
+        var customer = prompt("Please enter the Customer name", customerName);
+        if (customer === "" || customer == null) {
+          $("#customer").text("Cash / Credit");
+        } else if (customer != null) {
+          $("#customer").text(customer);
+        }
+      }
+      $(document).ready(function(){
+        setCustomerName();
+      })
+      
 
+      // Change customer name if required
+      $("#customer").on("click", function () {
+        setCustomerName();
+      });
     </script>
   </body>
 </html>

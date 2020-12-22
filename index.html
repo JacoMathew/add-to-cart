@@ -1,97 +1,122 @@
 <!DOCTYPE html>
 <html lang="en" style="scroll-behavior: smooth">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Site</title>
     <link rel="shortcut icon" href="#" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <script src="https://kit.fontawesome.com/ef8dcddefd.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/ef8dcddefd.js"
+      crossorigin="anonymous"
+    ></script>
     <link href="style.css" type="text/css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Ma+Shan+Zheng&display=swap"
-        rel="stylesheet">
-</head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Ma+Shan+Zheng&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-    <header id="headerNavbar">
-    </header>
+  <body>
+    <header id="headerNavbar"></header>
 
     <section id="section1" class="page1">
-        <div class="container-fluid py-3">
-            <div class="row d-flex justify-content-center align-items-center sectionStyle">
-                <h1 class="content">Awesome Landing Page</h1>
-            </div>
+      <div class="container-fluid py-3">
+        <div
+          class="row d-flex justify-content-center align-items-center sectionStyle"
+        >
+          <h1 class="content">Awesome Landing Page</h1>
         </div>
+      </div>
     </section>
 
     <section id="section2" class="page1">
-        <div class="container-fluid py-3">
-            <div class="row d-flex justify-content-center align-items-center sectionStyle">
-                <h1 class="content">Some awesome content about the website</h1>
-            </div>
+      <div class="container-fluid py-3">
+        <div
+          class="row d-flex justify-content-center align-items-center sectionStyle"
+        >
+          <h1 class="content">Some awesome content about the website</h1>
         </div>
+      </div>
     </section>
 
-<!-- Add style display to hide the element on start but it seems the div is not loading when display is set to none -->
-    <section id="Products" style="display: none;">
-        <div class="container-fluid py-3">
+    <!-- Add style display to hide the element on start -->
+    <section id="Products" style="display: none">
+      <div class="container-fluid py-3">
+        <div class="row">
+          <h1 class="content">Product Page</h1>
+          <div class="ml-auto col-12 col-md-6">
+            <button
+            class="shoppingCart"
+            type="button"
+            id="shoppingCart"
+            data-toggle="modal"
+            data-target="#ModalBill"
+          >
+            <span>
+              <i class="fas fa-shopping-cart fa-lg"></i>
+            </span>
+          </button>
 
-            <div class="row">
-                <h1 class="content">Product Page</h1>
-                <button 
-                class="shoppingCart ml-auto"
-                type="button"
-                id="shoppingCart"
-                data-toggle="modal"
-                data-target="#ModalBill"
-                style="cursor: pointer; z-index: 1;">                
-                    <span>
-                        <i class="fas fa-shopping-cart fa-lg"></i>
-                    </span> 
-                </button>
-                
+            <button class="shoppingCart" type="button" id="clearCart">
+              <span>
+                <i class="far fa-trash-alt fa-lg"></i>
+              </span>
+            </button>
+            
+          </div>
+        </div>
+
+        <div id="productId-container" class="my-2"></div>
+        <script id="products-template" type="text/x-handlebars-template">
+          {{#each category}}
+            <div id="{{sectionId}}" class="row mt-5">
+              <div class="col-12">
+                <h2 class="category">
+                  {{category}} :
+                </h2>
+              </div>
             </div>
 
-            <div id="productId-container" class="my-2"></div>
-            <script id="products-template" type="text/x-handlebars-template">
-                {{#each category}}
-                  <div id="{{sectionId}}" class="row mt-5">
-                    <div class="col-12">
-                      <h2 class="category">
-                        {{category}} :
-                      </h2>
-                    </div>
-                  </div>
-        
-                  <div class="row" id="{{divId}}">
-                  </div>
-                {{/each}}
-            </script>
-            <div id="item-template-script-container"></div>
-        </div>
+            <div class="row" id="{{divId}}">
+            </div>
+          {{/each}}
+        </script>
+        <div id="item-template-script-container"></div>
+      </div>
     </section>
 
-    <footer id="footer" class="footer">
-    </footer>
+    <footer id="footer" class="footer"></footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"
-        integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw=="
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"
+      integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw=="
+      crossorigin="anonymous"
+    ></script>
 
     <script src="Assets\productsJs\category.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

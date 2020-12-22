@@ -15,6 +15,10 @@
   font-family: "Berkshire Swash", cursive;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 #section1,
 #section2,
 #Products {
@@ -76,10 +80,14 @@
   height: 50px;
   border-radius: 100%;
   float: right;
-  margin-right: 2rem;
+  margin:0px 2rem 0px 0px;
+  cursor: pointer;
+  z-index: 11;
 }
 
-.buttonAdd, .buttonPlus, .buttonMinus{
+.buttonAdd, 
+.buttonPlus, 
+.buttonMinus{
   border-radius: .5rem;
 }
 
@@ -117,8 +125,32 @@ tbody tr:nth-child(even) {
 
 .receipt{
   padding: .5rem 2rem;
-
   background-color: black;
   color: white;
   border-radius: 1rem;
+}
+
+#customer{
+  cursor: pointer;
+}
+
+#customer:hover{
+  color: red;
+}
+
+.faBtn {
+  position: fixed;
+  border-radius: 40%;
+  background-color: var(--headerBGColour);
+  color: var(--headerTxtColour);
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 999;
+}
+
+@media only screen and (max-width: 745px){
+  .faBtn{
+    right: 0rem;
+    margin-right: .5rem;
+  }
 }

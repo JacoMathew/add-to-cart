@@ -1,12 +1,13 @@
 // Load item template partial to containers
-$("#item-template-script-container").load("partials/itemPartial.html",
+$("#item-template-script-container").load("/partials/itemPartial.html",
     function () {
+        // after loading, append modalBill.html file
         $.get("partials/modalBill.html",
             function (data) {
                 $("#item-template-script-container").append(data);
             }
         );
-    })
+    });
 
 // Load Header html template to Navbar container
 $("#headerNavbar").load("partials/headerPartial.html",
@@ -20,10 +21,13 @@ $("#headerNavbar").load("partials/headerPartial.html",
 // Load Footer html template to footer
 $("#footer").load("partials/footerPartial.html");
 
-
+let sticky = 0;
 // Toggle Product Page and Starter page
 $('#headerNavbar').on("click", "#ProductsNav", function () {
     toggleProducts("#Products", ".page1");
+
+    // set the y offset of Product section to do sticky button
+    sticky = Math.floor($('#productId-container').offset().top);
 });
 
 $('#headerNavbar').on("click", "#AboutNav , #EventsNav", function () {
@@ -40,6 +44,8 @@ function toggleProducts(showDiv, hideDiv) {
 $("#headerNavbar").on('click', '.nav-item', function () {
     $(".nav-item").removeClass("active");
     $(this).addClass('active');
+
+    $('#navbarNav').removeClass('show');
 });
 
 // Initialising empty cart object
@@ -72,22 +78,22 @@ $('#productId-container').on('click', '.buttonAdd', function () {
     var id = $(this).parent().attr('id');
     var element = '#' + id;
 
-// TODO : Show + and - with a count box in the center but it shows up only afer the first click
+    // TODO : Show + and - with a count box in the center but it shows up only afer the first click
     toggleCartButton(element + ' .buttonCluster', element + ' .buttonAdd');
 
     addToCart(id);
 
 });
 
-$('#productId-container').on('click', '.buttonPlus' , function () {
-    
+$('#productId-container').on('click', '.buttonPlus', function () {
+
     var id = $(this).parent().parent().attr('id');
 
     addToCart(id);
 });
 
-$('#productId-container').on('click', '.buttonMinus' , function () {
-    
+$('#productId-container').on('click', '.buttonMinus', function () {
+
     var id = $(this).parent().parent().attr('id');
 
     lessFromCart(id)
@@ -106,37 +112,37 @@ function addToCart(id) {
     } else {
         cart[product].qty++;
         cart[product].amount = cart[product].qty * cart[product].price
-        $('#'+id + ' h3' ).text(cart[product].qty);
+        $('#' + id + ' h3').text(cart[product].qty);
     }
     // TODO : Run a for Loop to find the total and save to cart property
     getTotal();
 };
 
 // function to less the item in cart
-function lessFromCart(id) { 
+function lessFromCart(id) {
     var textClass = id + 'Product';
     var product = $('.' + textClass).text().trim();
 
-    if(cart[product].qty > 1){
+    if (cart[product].qty > 1) {
         cart[product].qty--;
         cart[product].amount = cart[product].qty * cart[product].price
-        $('#'+id + ' h3' ).text(cart[product].qty);
-    } else{
+        $('#' + id + ' h3').text(cart[product].qty);
+    } else {
 
         // Delete cart product when the item is reduced to 0
         var element = '#' + id;
         delete cart[product];
-        
+
         // Toggle card footer buttons when the item is reduced to 0     
-        toggleCartButton(element + ' .buttonAdd' , element + ' .buttonCluster');
-        
+        toggleCartButton(element + ' .buttonAdd', element + ' .buttonCluster');
+
     }
-    getTotal(); 
+    getTotal();
 };
 
 function getTotal() {
     total = 0;
-    for (var prop in cart){
+    for (var prop in cart) {
         total += cart[prop].amount;
     };
 }
@@ -150,15 +156,55 @@ $('#shoppingCart').click(function () {
 
         $('#tableTotal').text(total);
 
-
         localStorage.setItem('cart', JSON.stringify(cart));
-        localStorage.setItem('total', total.toString() )
+        localStorage.setItem('total', total.toString())
     } else {
         $('.modal').attr('id', '');
         alert("The Cart is empty!!")
     }
 });
 
+// Clear button to reset the product page for fresh order
+$('#clearCart').click(function () {
+    if (Object.keys(cart).length !== 0) {
+        var confirmRes = confirm('Do you want to clear the Cart ?');
+
+        if(confirmRes){
+            cart = {};
+            total = 0;
+            console.log('The cart is cleared')
+
+            toggleCartButton('.card-footer .buttonAdd', '.card-footer .buttonCluster')
+            $('.card-footer h3').text('1');
+        } else {
+            console.log('Cart clearing is cancelled')
+        };
+    } else {
+        alert("The Cart is empty!!")
+    }
+});
+
+var height = $(window).height();
+var width = Math.floor(.80 * $(window).width());
+
 function printCart() {
-    window.open('partials/printTemplate.html', '_blank')
-};;
+    // Check if empty show the opened file above the current
+    window.open('partials/printTemplate.html', '', `width=${width},height=${height},location=no`)
+};
+
+// Alert user of reload or closing of tab
+$(window).on('beforeunload', function () {
+    return confirm('Are you sure you want to leave the page ?')
+});
+
+// TODO: Make the shopping button float
+window.onscroll = function() {cartFABtn()};
+
+function cartFABtn() {
+
+  if (window.pageYOffset >= sticky) {
+      $('#shoppingCart').addClass("faBtn");
+  } else {
+      $('#shoppingCart').removeClass("faBtn");
+  }
+}

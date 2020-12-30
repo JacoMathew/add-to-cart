@@ -208,3 +208,43 @@ function cartFABtn() {
       $('#shoppingCart').removeClass("faBtn");
   }
 }
+
+// Set up an input with type file and accept to choose a json file
+// with s JS object format. This way we can make changes to our object outside 
+// of the program and get it up to date.
+
+// When upload button is clicked in the modal
+function uploadInventory() {
+
+    // open an file browser dialog
+
+    let file = $("#fileInventory")[0].files[0];
+
+    if (typeof(file) !== 'undefined' && file.type == "application/json") {
+        $("#uploadResult").text('Correct file format').css('color','green');
+
+        var fileReader = new FileReader();
+        let textOfFile ;
+        
+        fileReader.onload = (e) => {
+            const file = e.target.result;
+            console.log(e);
+            console.log(e.target);
+            console.log(file);
+            
+            textOfFile = JSON.parse(file);
+
+            $('#uploadedFile').text(file);
+        }; 
+
+        fileReader.readAsText(file);
+
+    } else {
+        console.log('File is un-defined or you have not chosen a JSON file')
+        $("#uploadResult").text('Incorrect file format').css('color','red');
+    }    
+};
+
+
+
+

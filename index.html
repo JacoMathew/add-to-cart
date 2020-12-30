@@ -48,29 +48,36 @@
     </section>
 
     <!-- Add style display to hide the element on start -->
-    <section id="Products" style="display: none">
+    <section id="Products" style="display:none">
       <div class="container-fluid py-3">
         <div class="row">
           <h1 class="content">Product Page</h1>
           <div class="ml-auto col-12 col-md-6">
             <button
-            class="shoppingCart"
-            type="button"
-            id="shoppingCart"
-            data-toggle="modal"
-            data-target="#ModalBill"
-          >
-            <span>
-              <i class="fas fa-shopping-cart fa-lg"></i>
-            </span>
-          </button>
+              class="shoppingCart"
+              type="button"
+              id="shoppingCart"
+              data-toggle="modal"
+              data-target="#ModalBill"
+            >
+              <span>
+                <i class="fas fa-shopping-cart fa-lg"></i>
+              </span>
+            </button>
 
             <button class="shoppingCart" type="button" id="clearCart">
               <span>
                 <i class="far fa-trash-alt fa-lg"></i>
               </span>
             </button>
-            
+
+            <button class="shoppingCart" type="button" id="uploadInventory"
+            data-target="#ModalUpload"
+            data-toggle="modal">
+              <span>
+                <i class="fas fa-file-upload fa-lg"></i>
+              </span>
+            </button>
           </div>
         </div>
 

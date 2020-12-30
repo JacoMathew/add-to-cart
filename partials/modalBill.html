@@ -1,12 +1,13 @@
 <!-- Modal -->
 <div
   class="modal fade bd-example-modal-lg"
+  id="ModalBill"
   tabindex="-1"
   role="dialog"
   aria-labelledby="ModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLabel">Bill :</h5>
@@ -80,14 +81,72 @@
         <div id="modalBody"></div>
       </div>
       <div class="modal-footer">
-        <button id="printButton" type="button" class="btn btn-secondary"
-        onclick="printCart()">
+        <button
+          id="printButton"
+          type="button"
+          class="btn btn-secondary"
+          onclick="printCart()"
+        >
           Print
         </button>
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade bd-example-modal-lg"
+  id="ModalUpload"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalLabelUpload"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelUpload">Upload Inventory :</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"> &times; </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="contaier-fluid">
+          <div class="row mb-5">
+            <h1>Choose Inventory JSON file</h1>
+          </div>
+          <div class="row mt-5 justify-content-center">
+            <input type="file" id="fileInventory" type=".json" />
+          </div>
+          <div class="row mt-3 justify-content-center" id="uploadResult"></div>
+          <div
+            class="row my-3 px-5 pb-5 justify-content-center"
+            id="uploadedFile"
+          ></div>
+        </div>
+        <div class="modal-footer">
+          <button
+            id="uploadButton"
+            type="button"
+            class="btn btn-secondary"
+            onclick="uploadInventory()"
+          >
+            Upload
+          </button>
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>

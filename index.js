@@ -1,5 +1,5 @@
 // Load item template partial to containers
-$("#item-template-script-container").load("/partials/itemPartial.html",
+$("#item-template-script-container").load("partials/itemPartial.html",
     function () {
         // after loading, append modalBill.html file
         $.get("partials/modalBill.html",
